@@ -1,6 +1,6 @@
 @icon("res://addons/mouton_fsm/assets/StateMachine.svg")
 extends Node
-## Switches through mutiple States (as children of the machine
+## Switches through mutiple States (as children of the machine)
 class_name Machine
 
 ## Default state to fall back to (for when the current state is deleted)
