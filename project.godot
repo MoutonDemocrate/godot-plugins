@@ -16,4 +16,4 @@ config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/mouton-status/plugin.cfg", "res://addons/mouton_fsm/plugin.cfg")
+enabled=PackedStringArray("res://addons/mouton_fsm/plugin.cfg")

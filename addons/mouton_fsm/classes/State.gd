@@ -1,3 +1,4 @@
+@tool
 @icon("res://addons/mouton_fsm/assets/State.svg")
 extends Node
 ## Uses a Machine as its parent to receive inputs, data and define behaviour.
@@ -10,7 +11,7 @@ class_name State
 signal state_left()
 signal state_entered()
 
-func ready() -> void :
+func _ready() -> void :
 	pass
 
 ## Called on state entered.
@@ -24,3 +25,5 @@ func entered(old_state : State) :
 ## Used to ping the state, for debug purposes.
 func ping() :
 	pass
+
+
