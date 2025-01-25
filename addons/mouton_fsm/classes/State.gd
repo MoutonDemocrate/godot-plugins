@@ -14,12 +14,20 @@ signal state_entered()
 func _ready() -> void :
 	pass
 
+func left(new_state: State) -> void:
+	state_left.emit()
+	_left(new_state)
+
 ## Called on state entered.
-func left(new_state : State) :
+func _left(_new_state : State) :
 	pass
 
+func entered(old_state: State) -> void:
+	state_entered.emit()
+	_entered(old_state)
+
 ## Called on state left.
-func entered(old_state : State) :
+func _entered(_old_state : State) :
 	pass
 
 ## Used to ping the state, for debug purposes.

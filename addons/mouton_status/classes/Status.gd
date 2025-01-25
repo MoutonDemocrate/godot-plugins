@@ -1,15 +1,24 @@
-extends Node
+extends Resource
 ## Uses a StatusManager as its parent to control Status effects
 class_name Status
 
 ## StatusManager which the status is linked to
-@onready var manager : StatusManager = self.get_parent()
+#@onready var manager : StatusManager = self.get_parent()
+
+## Status icon
+@export var icon : ImageTexture
+
+## Status description
+@export_multiline var description : String
+
 ## If true, this status can stack
 @export var stackable : bool = false
+
 ## (Optional) Alignment of the status
 ## positive = regeneration, damage boost, etc...
 ## negative = poisoned, paralysed, etc...
 @export var positive : bool = true
+
 ## Number of stacks of the status effect (if stackable)
 var stacks : int
 
@@ -24,22 +33,52 @@ signal status_destacked(amount : int)
 ## Emitted on status tick
 signal status_ticked()
 
-## Called on status added
+## [internal], do not override. Use [_added()] instead.
 func added() -> void :
-    pass
+	status_added.emit()
+	_added()
+
+## [internal], do not override. Use [_removed()] instead.
+func removed() -> void :
+	status_removed.emit()
+	_removed()
+
+## [internal], do not override. Use [_stacked(amount: float)] instead.
+func stacked(amount: int) -> void :
+	status_stacked.emit(amount)
+	_stacked(amount)
+
+## [internal], do not override. Use [_destacked(amount: float)] instead.
+func destacked(amount: int) -> void :
+	status_destacked.emit(amount)
+	_destacked(amount)
+
+## [internal], do not override. Use [_tick()] instead.
+func tick() -> void :
+	status_ticked.emit()
+	_tick()
+
+## Called on status added
+func _added() -> void :
+	pass
 
 ## Called on status removed
-func removed() -> void :
-    pass
+func _removed() -> void :
+	pass
 
 ## Called on status stacked (if stackable)
-func stacked() -> void :
-    pass
+func _stacked(_amount: int) -> void :
+	pass
 
 ## Called on status destacked (if stackable)
-func destacked() -> void :
-    pass
+func _destacked(_amount: int) -> void :
+	pass
 
 ## Called on status ticked
-func tick() -> void :
-    pass
+func _tick() -> void :
+	pass
+
+## [experimental]
+## Ping (for test purposes)
+func ping() -> Error:
+	return OK
